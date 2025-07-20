@@ -4,10 +4,11 @@ interface AnalyticsData {
 }
 
 interface AnalyticsProps {
+  editMode?: boolean;
   data: AnalyticsData[];
 }
 
-export default function Analytics({ data }: AnalyticsProps) {
+export default function Analytics({ data, editMode = false }: AnalyticsProps) {
   return (
     <div className="analytics-widget">
       <h2>Analytics</h2>

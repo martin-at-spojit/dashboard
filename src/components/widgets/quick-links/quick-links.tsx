@@ -5,10 +5,14 @@ interface LinkData {
 }
 
 interface QuickLinksProps {
+  editMode?: boolean;
   data: LinkData[];
 }
 
-export default function QuickLinks({ data }: QuickLinksProps) {
+export default function QuickLinks({
+  data,
+  editMode = false,
+}: QuickLinksProps) {
   return (
     <div className="quick-links-widget">
       <h2>Quick Links</h2>

@@ -5,13 +5,16 @@ interface AccountData {
 }
 
 interface AccountsProps {
+  editMode?: boolean;
   data: AccountData[];
 }
 
-export default function Accounts({ data }: AccountsProps) {
+export default function Accounts({ data, editMode = false }: AccountsProps) {
   return (
     <div className="accounts-widget-content">
-      <p>List of accounts will be displayed here.</p>
+      {!editMode && (
+        <button onClick={() => console.log('add account')}>add account</button>
+      )}
       {data && data.length > 0 ? (
         <ul>
           {data.map((account) => (
@@ -21,7 +24,9 @@ export default function Accounts({ data }: AccountsProps) {
           ))}
         </ul>
       ) : (
-        <p>No accounts available.</p>
+        <>
+          <p>No accounts available.</p>
+        </>
       )}
     </div>
   );

@@ -1,13 +1,12 @@
 import dynamic from 'next/dynamic';
-
-interface WidgetData {
+export interface WidgetData {
   accounts?: Array<{ id: string; name: string; balance: number }>;
   analytics?: Array<{ title: string; value: string }>;
   'quick-links'?: Array<{ title: string; url: string; name: string }>;
 }
-
 interface WidgetContentProps {
   type: string;
+  editMode?: boolean;
   data?: WidgetData;
   className?: string;
 }
@@ -20,7 +19,11 @@ const widgetMap = {
   ),
 };
 
-const WidgetContent = ({ type, data = {} }: WidgetContentProps) => {
+const WidgetContent = ({
+  type,
+  editMode = false,
+  data = {},
+}: WidgetContentProps) => {
   const WidgetContent = widgetMap[type as keyof typeof widgetMap];
 
   if (!WidgetContent) {
@@ -30,7 +33,7 @@ const WidgetContent = ({ type, data = {} }: WidgetContentProps) => {
 
   const widgetData = data[type as keyof WidgetData] || [];
 
-  return <WidgetContent data={widgetData as never} />;
+  return <WidgetContent editMode={editMode} data={widgetData as never} />;
 };
 
 export default WidgetContent;
